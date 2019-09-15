@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/assets/css/common.css"/>
+    <link rel="stylesheet" href="/assets/css/search.css"/>
+    <title>Risultati per {{searched}}</title>
+</head>
+<body>
+<div id="container">
+    <a href="/"><h1>TNTVillage mirror</h1></a>
+    <h2>Risultati di ricerca per "{{searched}}"</h2>
+    <table>
+        <tr>
+            <th>Categoria</th>
+            <th>Data</th>
+            <th>Titolo</th>
+            <th>Dimensione</th>
+            <th>Seeds</th>
+            <th>Leechers</th>
+            <th>Download</th>
+        </tr>
+        {% for result in results %}
+        <tr>
+            <td>{{result.category.pretty_name()}}</td>
+            <td>{{result.date_time.strftime("%d/%m/%Y %H:%M")}}</td>
+            <td><b>{{result.title}}</b><br/>{{result.description}}</td>
+            <td>{{result.human_readable_size}}</td>
+            <td>{{result.seeds}}</td>
+            <td>{{result.leechers}}</td>
+            <td><a href="{{result.magnet_link}}"><i class="fas fa-magnet"></i></a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+<script src="https://kit.fontawesome.com/98e2460f56.js"></script>
+</body>
+</html>

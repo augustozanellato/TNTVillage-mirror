@@ -1,0 +1,9 @@
+div#container{
+    display: inline-block;
+    margin: auto;
+    min-width: 60%;
+}
+body{
+    display: flex;
+    justify-content: center;
+}
