@@ -83,7 +83,7 @@ class Record(Base):
             update_trackers()
         magnet_params = urlencode({'dn': self.title,
             'tr': trackers,
-            'xl': self.size}, quote_via=url_quote)
+            'xl': self.size}, quote_via=url_quote, doseq=True)
         return f'magnet:?xt=urn:btih:{self.hash}&{magnet_params}'
     
     def scrape(self, trackers_list, num_trackers=5):
