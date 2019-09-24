@@ -145,6 +145,7 @@ def udp_get_transaction_id():
 if __name__ == "__main__":
 	from commons import *
 	from joblib import Parallel, delayed
+	import platform
 	engine, session = get_database()
 	records = session.query(Record).all()
 	current = 0
@@ -155,5 +156,8 @@ if __name__ == "__main__":
 		print(f"Scraped {record.id} with {record.seeds} seeds and {record.leechers} leechers")
 
 	my_trackers = update_trackers()
-	Parallel(n_jobs=56)(delayed(scrape_record)(record, my_trackers) for record in records)
+	n_jobs = 128
+	if platform.system() == "Windows":
+		n_jobs = 56 #windows can't handle more than 64 udp sockets, also leaving some headroom.
+	Parallel(n_jobs=n_jobs)(delayed(scrape_record)(record, my_trackers) for record in records)
 	session.commit()
