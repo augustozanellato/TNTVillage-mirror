@@ -147,6 +147,7 @@ if __name__ == "__main__":
     from joblib import Parallel, delayed
     import platform
     from random import sample
+    from time import sleep
     n_jobs = 128
     if platform.system() == "Windows":
         n_jobs = 56 #windows can't handle more than 64 udp sockets, also leaving some headroom.
@@ -171,7 +172,11 @@ if __name__ == "__main__":
                     record.leechers += result[record.hash]["peers"]
             except socket.timeout:
                 pass
-        session.commit()
+        try:
+            session.commit()
+        except Exception:
+            sleep(0.01)
+            session.commit()
         print(f"Scraped from {records[0].id} to {records[-1].id}")
 
     def divide_chunks(l, n):

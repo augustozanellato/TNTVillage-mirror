@@ -25,7 +25,7 @@
         {% for result in results %}
         <tr>
             <td>{{result.category.pretty_name()}}</td>
-            <td>{{result.date_time.strftime("%d/%m/%Y %H:%M")}}</td>
+            <td>{{result.date_time.strftime("%d/%m/%Y<br/>%H:%M")}}</td>
             <td><b>{{result.title}}</b><br/>{{result.description}}</td>
             <td>{{result.human_readable_size}}</td>
             <td>{{result.seeds}}</td>
